@@ -1,0 +1,11 @@
+import EXEParser from './src/EXEParser.js';
+import fs from 'fs';
+const file = new Uint8Array(fs.readFileSync('i.exe'));
+let parser = new EXEParser();
+parser.setFile(file);
+let dosHeader = parser.readDOSHeader();
+let ntHeader = parser.readNTHeader(dosHeader);
+let generalInfo = parser.readGeneralInfo(ntHeader);
+console.log(generalInfo);
+console.log(dosHeader);
+console.log(ntHeader);
